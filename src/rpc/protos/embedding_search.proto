@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package embedding_search;
+
+service EmbeddingSearch {
+
+  rpc add_embedding(AddEmbeddingRequest)
+      returns (AddEmbeddingReplay);
+
+  rpc update_embedding(UpdateEmbeddingRequest)
+      returns (UpdateEmbeddingReply);
+
+  rpc delete_embedding(DeleteEmbeddingRequest)
+      returns (DeleteEmbeddingRequest);
+
+  rpc search_embedding(SearchEmbeddingRequest)
+      returns (SearchEmbeddingReply);
+}
+
+message AddEmbeddingRequest {
+    string collection_name = 1;
+    bytes embedding_id = 2; // uuid object serialized by pickle.
+    bytes embedding_vector = 3; // list format serialized by pickle.
+
+}
+
+message AddEmbeddingReplay {
+
+}
+
+message UpdateEmbeddingRequest {
+    string collection_name = 1;
+    bytes embedding_id = 2; // uuid object serialized by pickle.
+    bytes embedding_vector = 3; // list format serialized by pickle.
+
+}
+
+message UpdateEmbeddingReply {
+
+}
+
+message DeleteEmbeddingRequest {
+    string collection_name = 1;
+    bytes embedding_id = 2; // uuid object serialized by pickle.
+
+
+}
+
+message DeleteEmbeddingReply {
+
+}
+
+message SearchEmbeddingRequest {
+    string collection_name = 1;
+    bytes embedding_vector = 2; // uuid object serialized by pickle.
+    int32 top_nearest_embedding = 3;
+
+}
+
+message SearchEmbeddingReply {
+  bytes nearest_embeddings = 1; // list of nearest embedding id serialized by pickle.
+}
